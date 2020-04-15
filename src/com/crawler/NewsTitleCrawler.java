@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 
 public class NewsTitleCrawler {
     public static void main(String[] args) {
-        final String NEWS_REGEX = "htm\">(.*?[^&quot;])</a>\\s*</h";
+        final String NEWS_REGEX = ">(.*?[^&quot;])</a>\\s+</h";
         final String NEWS_REGEX_QUOT_CODE = "htm\">(.*?)&quot;(.*?)&quot;(.*?)</a>\\s+</h";
-        final String SUB_NEWS_REGEX = "<b>(.*?)</b>\\s+</a>";
+        final String SUB_NEWS_REGEX = ">(.*?)</b>\\s+</a>";
         final String HEADLINE_REGEX = "<li><a title=\"(.*?)\".*\">[^<]";
         final String NEWS_STREAM_REGEX = "<li>\\s+<a title=.*\">(.*?)</a>";
 

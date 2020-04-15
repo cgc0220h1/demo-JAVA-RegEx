@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 
 public class SongNameCrawler {
     public static void main(String[] args) {
-        String regexTitleOnly = "'title']\\);\"\\s>(..*?)</a>";
-        String regexTitleAndArtist = "title=\"([^Nghe bài hát]..*?)\"\\sonclick=\"lt\\(\\['genre','list-song'";
+        String regexTitleOnly = ";\" >(..*?)</a>";
+        String regexTitleAndArtist = "title=\"([^Nghe bài hát]..*?)\" onclick=\"lt\\(\\['genre','list-song'";
         Scanner scanner;
         try {
             URL url = new URL("https://www.nhaccuatui.com/bai-hat/nhac-tre-moi.html");
