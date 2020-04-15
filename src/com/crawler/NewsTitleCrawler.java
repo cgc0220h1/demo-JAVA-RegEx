@@ -11,7 +11,11 @@ import java.util.regex.Pattern;
 public class NewsTitleCrawler {
     public static void main(String[] args) {
         final String NEWS_REGEX = "htm\">(.*?[^&quot;])</a>\\s*</h";
-        final String NEWS_REGEX_QUOT_CODE = "htm\">(.*?)&quot;(.*?)&quot;(.*?)</a>\\s*</h";
+        final String NEWS_REGEX_QUOT_CODE = "htm\">(.*?)&quot;(.*?)&quot;(.*?)</a>\\s+</h";
+        final String SUB_NEWS_REGEX = "<b>(.*?)</b>\\s+</a>";
+        final String HEADLINE_REGEX = "<li><a title=\"(.*?)\".*\">[^<]";
+        final String NEWS_STREAM_REGEX = "<li>\\s+<a title=.*\">(.*?)</a>";
+
         Scanner scanner;
         try {
             URL url = new URL("https://dantri.com.vn/the-gioi.htm");
@@ -20,9 +24,25 @@ public class NewsTitleCrawler {
             String content = scanner.next();
             scanner.close();
 
-            Pattern pattern = Pattern.compile(NEWS_REGEX);
+            Pattern pattern = Pattern.compile(HEADLINE_REGEX);
             Matcher matcher = pattern.matcher(content);
-            System.out.println("Danh sách tin tức: \n");
+            System.out.println("Danh sách tin tiêu điểm: \n");
+            while (matcher.find()) {
+                System.out.println(matcher.group(1));
+            }
+
+            System.out.println("-------------------------------");
+            pattern = Pattern.compile(NEWS_STREAM_REGEX);
+            matcher = pattern.matcher(content);
+            System.out.println("Dòng thời sự: \n");
+            while (matcher.find()) {
+                System.out.println(matcher.group(1));
+            }
+
+            System.out.println("-------------------------------");
+            pattern = Pattern.compile(NEWS_REGEX);
+            matcher = pattern.matcher(content);
+            System.out.println("Danh sách tin hôm nay: \n");
             while (matcher.find()) {
                 System.out.println(matcher.group(1));
             }
@@ -33,6 +53,14 @@ public class NewsTitleCrawler {
                 System.out.println(matcher.group(1)
                         + matcher.group(2)
                         + matcher.group(3));
+            }
+
+            System.out.println("-------------------------------");
+            pattern = Pattern.compile(SUB_NEWS_REGEX);
+            matcher = pattern.matcher(content);
+            System.out.println("Danh sách tin tức hôm trước: \n");
+            while (matcher.find()) {
+                System.out.println(matcher.group(1));
             }
 
         } catch (MalformedURLException e) {
