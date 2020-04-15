@@ -4,14 +4,14 @@ import java.util.regex.Pattern;
 
 public class EmailValidation {
     private static Pattern pattern;
-    private static final String EMAIL_REGEX = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
+    private static final String EMAIL_REGEX = "^\\D\\w*@\\w+\\.(\\w{2,3}|\\.\\w{2,3})";
 
     public EmailValidation() {
         pattern = Pattern.compile(EMAIL_REGEX);
     }
 
     public boolean validate(String input) {
-        return pattern.matcher(input).matches();
+        return pattern.matcher(input).find();
     }
 
     public static void main(String[] args) {
@@ -20,6 +20,7 @@ public class EmailValidation {
         String[] emails = {"a@gmail.com"
                 ,"ab@yahoo.com"
                 ,"abc@hotmail.com"
+                ,"namCT@yahoo.com.vn"
                 ,"@gmail.com"
                 ,"ab@gmail."
                 ,"@#abc@gmail.com"};
